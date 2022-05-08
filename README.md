@@ -12,7 +12,7 @@ Workshop on REST API best practices
 Run `yarn install` and `yarn run dev` on your machine after cloning.
 
 ### Main project structure
-
+```
 |____refactored-doodle
 |    |____public
 |         |____index.html
@@ -32,7 +32,7 @@ Run `yarn install` and `yarn run dev` on your machine after cloning.
 |              |____routes
 |                   |____workoutRoutes.js
 |         |____index.js
-
+```
 1. Setup and config express/scripts
 
 ```javascript
