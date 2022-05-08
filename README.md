@@ -8,6 +8,31 @@ Workshop on REST API best practices
 - Postman
 - SwaggerUI
 
+## To use:
+Run `yarn install` and `yarn run dev` on your machine after cloning.
+
+### Main project structure
+
+|____refactored-doodle
+|    |____public
+|         |____index.html
+|         |____css
+|              |____styles.css
+|         |____js
+|              |____app.js
+|    |____src
+|         |____controllers
+|              |____app.js
+|         |____database
+|              |____db.json
+|              |____Workout.js
+|         |____services
+|              |____workoutService.js
+|         |____v1
+|              |____routes
+|                   |____workoutRoutes.js
+|         |____index.js
+
 1. Setup and config express/scripts
 
 ```javascript
@@ -155,3 +180,78 @@ router.patch("/:workoutId", workoutController.updateOneWorkout);
 router.delete("/:workoutId", workoutController.deleteOneWorkout);
 ``````
 
+7. Create service layer:
+   ```javascript
+    const getAllWorkouts = () => {
+  return;
+};
+
+const getOneWorkout = () => {
+  return;
+};
+
+const createNewWorkout = () => {
+  return;
+};
+
+const updateOneWorkout = () => {
+  return;
+};
+
+const deleteOneWorkout = () => {
+  return;
+};
+
+module.exports = {
+  getAllWorkouts,
+  getOneWorkout,
+  createNewWorkout,
+  updateOneWorkout,
+  deleteOneWorkout,
+};
+   ```
+   "It's also a good practice to name the service methods the same as the controller methods so that you have a connection between those. Let's start off with just returning nothing."
+8. Use methods inside of workout controller so it can communicate with our service layer:
+
+```javascript
+    const workoutService = require("../services/workoutService");
+
+const getAllWorkouts = (req, res) => {
+  const allWorkouts = workoutService.getAllWorkouts();
+  res.send("Get all workouts");
+};
+
+const getOneWorkout = (req, res) => {
+  const workout = workoutService.getOneWorkout();
+  res.send("Get an existing workout");
+};
+
+const createNewWorkout = (req, res) => {
+  const createdWorkout = workoutService.createNewWorkout();
+  res.send("Create a new workout");
+};
+
+const updateOneWorkout = (req, res) => {
+  const updatedWorkout = workoutService.updateOneWorkout();
+  res.send("Update an existing workout");
+};
+
+const deleteOneWorkout = (req, res) => {
+  const updatedWorkout = workoutService.updateOneWorkout();
+  res.send("Delete an existing workout");
+};
+
+module.exports = {
+  getAllWorkouts,
+  getOneWorkout,
+  createNewWorkout,
+  updateOneWorkout,
+  deleteOneWorkout,
+};
+```
+
+9. Create DB/DB files. In this project, `db.json` is created for the data and `Workout.js` for the workout-specific methods.
+10. Create a data-access layer and return all workouts from the `db.json` file.
+11. To be able to parse the request body sent back, install the `body-parser` package and configure it in the `src/index.js` file.
+
+[OG source project - via FreeCodeCamp](https://www.freecodecamp.org/news/rest-api-design-best-practices-build-a-rest-api/)
