@@ -178,37 +178,36 @@ router.post("/", workoutController.createNewWorkout);
 router.patch("/:workoutId", workoutController.updateOneWorkout);
 
 router.delete("/:workoutId", workoutController.deleteOneWorkout);
-``````
+```
 
 7. Create service layer:
    ```javascript
     const getAllWorkouts = () => {
-  return;
-};
+        return;
+    };
+    const getOneWorkout = () => {
+        return;
+    };
 
-const getOneWorkout = () => {
-  return;
-};
+    const createNewWorkout = () => {
+        return;
+    };
 
-const createNewWorkout = () => {
-  return;
-};
+    const updateOneWorkout = () => {
+        return;
+    };
 
-const updateOneWorkout = () => {
-  return;
-};
+    const deleteOneWorkout = () => {
+        return;
+    };
 
-const deleteOneWorkout = () => {
-  return;
-};
-
-module.exports = {
-  getAllWorkouts,
-  getOneWorkout,
-  createNewWorkout,
-  updateOneWorkout,
-  deleteOneWorkout,
-};
+    module.exports = {
+    getAllWorkouts,
+    getOneWorkout,
+    createNewWorkout,
+    updateOneWorkout,
+    deleteOneWorkout,
+    };
    ```
    "It's also a good practice to name the service methods the same as the controller methods so that you have a connection between those. Let's start off with just returning nothing."
 8. Use methods inside of workout controller so it can communicate with our service layer:
