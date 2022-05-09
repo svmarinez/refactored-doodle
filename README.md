@@ -251,6 +251,38 @@ module.exports = {
 
 9. Create DB/DB files. In this project, `db.json` is created for the data and `Workout.js` for the workout-specific methods.
 10. Create a data-access layer and return all workouts from the `db.json` file.
-11. To be able to parse the request body sent back, install the `body-parser` package and configure it in the `src/index.js` file.
+11. To be able to parse the request body sent back, install the `body-parser` package and configure it in the `src/index.js` file. This will help receive the JSON data inside the controller under `req.body`.
+12. Test in Postman by creating a POST request to `localhost:3000/api/v1/workouts` and a request body in JSON format. The missing properties ('id', 'createdAt', 'updatedAt`) will be added by the API before inserting it through the workout service..
+13. Inside the workout controller method `createNewWorkout`, extract the body from the request object, do some validation, and then pass it in as an argument to the workout service. For improving this, a third party package can be used.
+14. Go into the workout service and receive the data inside the new createWorkout method. Add the missing properties to the object and pass it as a new method inside the DB.
+15. Create a Util function to overwrite the JSON file and persist the data. In the file, require fs:
+```javascript
+
+const fs = require("fs");
+
+const saveToDatabase = (DB) => {
+  fs.writeFileSync("./src/database/db.json", JSON.stringify(DB, null, 2), {
+    encoding: "utf-8",
+  });
+};
+
+module.exports = { saveToDatabase };
+```
+16. Use the Util function in the `Workout.js` file:
+
+```javascript 
+    const createNewWorkout = (newWorkout) => {
+  const isAlreadyAdded =
+    DB.workouts.findIndex((workout) => workout.name === newWorkout.name) > -1;
+  if (isAlreadyAdded) {
+    return;
+  }
+  DB.workouts.push(newWorkout);
+  saveToDatabase(DB);
+  return newWorkout;
+};
+
+//also add that function into the module.exports
+```
 
 [OG source project - via FreeCodeCamp](https://www.freecodecamp.org/news/rest-api-design-best-practices-build-a-rest-api/)
