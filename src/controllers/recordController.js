@@ -2,8 +2,8 @@ const recordService = require("../services/recordService");
 
 const getRecordForWorkout = (req, res) => {
   try {
-    const records = recordService.getRecordForWorkout(workoutId);
-    res.send({ status: "OK", data: [record] });
+    const record = recordService.getRecordForWorkout(req.params.workoutId);
+    res.send({ status: "OK", data: [...record] });
   } catch (error) {
     res
       .status(error.status || 500)
