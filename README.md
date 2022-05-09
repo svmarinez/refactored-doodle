@@ -138,7 +138,7 @@ app.listen(PORT, () => {
 
 6. Create a controller method for each endpoint and refactor router:
 
-````javascript
+```javascript
 // In src/controllers/workoutController.js
 const getAllWorkouts = (req, res) => {
   res.send("Get all workouts");
